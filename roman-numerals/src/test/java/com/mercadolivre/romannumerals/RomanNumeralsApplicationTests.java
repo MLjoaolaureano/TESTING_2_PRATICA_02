@@ -15,33 +15,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class RomanNumeralsApplicationTests {
-  @Autowired
-  private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-  @Test
-  void oneShouldBeI() throws Exception {
-    performTest("1", "I");
-  }
+    @Test
+    void oneShouldBeI() throws Exception {
+        performTest("1", "I");
+    }
 
-  @Test
-  void tenShouldBeX() throws Exception {
-    performTest("10", "X");
-  }
+    @Test
+    void oneShouldBeIII() throws Exception {
+        performTest("3", "III");
+    }
 
-  @Test
-  void sevenShouldBeVII() throws Exception {
-    performTest("7", "VII");
-  }
+    @Test
+    void oneShouldBeV() throws Exception {
+        performTest("5", "V");
+    }
 
-  @Test
-  void fifteenShouldBeXV() throws Exception {
-    performTest("15", "XV");
-  }
+    @Test
+    void sevenShouldBeVII() throws Exception {
+        performTest("7", "VII");
+    }
 
-  private void performTest(String decimal, String roman) throws Exception {
-    this.mockMvc.perform(get("/" + decimal))
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().string(containsString(roman)));
-  }
+    @Test
+    void tenShouldBeX() throws Exception {
+        performTest("10", "X");
+    }
+
+    @Test
+    void fifteenShouldBeXV() throws Exception {
+        performTest("15", "XV");
+    }
+
+    @Test
+    void fifteenShouldBeL() throws Exception {
+        performTest("50", "L");
+    }
+
+    private void performTest(String decimal, String roman) throws Exception {
+        this.mockMvc.perform(get("/" + decimal))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(roman)));
+    }
 }
